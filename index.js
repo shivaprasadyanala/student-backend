@@ -1,7 +1,7 @@
 const express = require('express')
 require('dotenv').config()
 const app = express()
-const port = process.env.PORT || 4001
+    // const port = 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 var Student = require('./models/Student');
@@ -47,8 +47,8 @@ app.put('/updatestudents/:id', async(req, res) => {
 mongoose.connect(url)
     // mongoose.connect("mongodb://localhost:27017/student")
     .then(() => {
-        app.listen(port, () => {
-            console.log(`app is listening on port ${port}`);
+        app.listen(process.env.PORT || 4001, '0.0.0.0', () => {
+            console.log("server is running");
         })
 
     })
