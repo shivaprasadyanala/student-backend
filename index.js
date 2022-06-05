@@ -18,6 +18,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const cors = require('cors')
 app.use(cors())
 
+app.get('/', async(req, res) => {
+    res.status(200).send("welcome to student page")
+})
 app.get('/getstudents', async(req, res) => {
     const students = await Student.find();
     res.status(200).send(students)
