@@ -1,4 +1,5 @@
 const express = require('express')
+require('dotenv').config()
 const app = express()
 const port = 4001
 var bodyParser = require('body-parser');
@@ -6,11 +7,16 @@ app.use(bodyParser.json());
 var Student = require('./models/Student');
 const { default: mongoose } = require('mongoose');
 
+const url = `mongodb+srv://${process.env.NAME}:${process.env.PASSWORD}@cluster0.pbagd.mongodb.net/student`;
+const connectionParams = {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 const cors = require('cors')
 app.use(cors())
-
 
 app.get('/getstudents', async(req, res) => {
     const students = await Student.find();
@@ -35,7 +41,8 @@ app.put('/updatestudents/:id', async(req, res) => {
         res.status(401).send("student not found")
     }
 })
-mongoose.connect("mongodb+srv://shiva:shiva@cluster0.pbagd.mongodb.net/student")
+mongoose.connect(url)
+    // mongoose.connect("mongodb://localhost:27017/student")
     .then(() => {
         app.listen(port, () => {
             console.log(`app is listening on port ${port}`);
@@ -43,5 +50,5 @@ mongoose.connect("mongodb+srv://shiva:shiva@cluster0.pbagd.mongodb.net/student")
 
     })
     .catch((err) => {
-        console.log("Error Occured");
+        console.log("Error Occured while connection database");
     })
