@@ -46,8 +46,8 @@ app.put('/updatestudents/:id', async(req, res) => {
 mongoose.connect(url)
     // mongoose.connect("mongodb://localhost:27017/student")
     .then(() => {
-        app.listen(process.env.PORT || 4001, () => {
-            console.log(`server is running on ${process.env.PORT || 4001}`);
+        app.listen(process.env.PORT, () => {
+            console.log(`server is running on ${process.env.PORT}`);
         })
 
     })
