@@ -1,7 +1,7 @@
 const express = require('express')
 require('dotenv').config()
 const app = express()
-const port = 4001
+const port = process.env.PORT || 4001
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 var Student = require('./models/Student');
